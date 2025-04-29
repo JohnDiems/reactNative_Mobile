@@ -1,17 +1,14 @@
-import { StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import {Stack} from 'expo-router'
 import React from 'react'
 
 const _layout = () => {
-
-    const colorScheme = useColorScheme()
-    console.log(colorScheme);
-    
   return (
     <View style={{flex: 1}}>
         <Stack>
             <Stack.Screen name="index" options={{headerShown: false}}/>
             <Stack.Screen name="register" options={{title: 'Register'}}/>
+            <Stack.Screen name="(auth)/login" options={{ headerShown: false , title: 'Home'}}/>
         </Stack>
     </View>
   )
@@ -19,4 +16,6 @@ const _layout = () => {
 
 export default _layout
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+})
