@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      router.replace("/(auth)/login");
+      router.replace("/login");
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -29,7 +29,7 @@ const Home = () => {
         <View style={styles.textContainer}>
           <Text style={styles.heading}>HMIS</Text>
           <Text style={styles.subheading}>Mobile App</Text>
-            {isLoading && (
+          {isLoading && (
             <ActivityIndicator 
               size="large" 
               color="#fff" 
@@ -53,33 +53,37 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     position: "absolute",
-    opacity: 0.5,
+    opacity: 0.6,
   },
   contentContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     zIndex: 1,
   },
   textContainer: {
+    flex: 0.5,
+    justifyContent: "center",
     alignItems: "center",
   },
   heading: {
-    fontSize: 40,
-    color: "#fff",
+    fontSize: 70,
+    color: "#e0e0e0",
     fontWeight: "900",
     letterSpacing: 1,
+    opacity: 0.5,
   },
   subheading: {
-    fontSize: 30,
+    fontSize: 25,
     color: "#e0e0e0",
     textTransform: "uppercase",
     fontWeight: "500",
-    letterSpacing: 1,
+    lineHeight: 25,
+    opacity: 0.5,
   },
   dcho: {
-    width: 50,
-    height: 50,
-    marginVertical: 10,
+    width: 100,
+    height: 100,
+    marginVertical: 60,
+    opacity: 0.5,
   },
 });

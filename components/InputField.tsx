@@ -71,6 +71,5 @@ const styles = StyleSheet.create({
   iconWrapper: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-    
   },
 });

@@ -1,21 +1,23 @@
-import { StyleSheet, View } from 'react-native'
-import {Stack} from 'expo-router'
-import React from 'react'
+import { StyleSheet } from "react-native";
+import { Stack } from "expo-router";
+import { StatusBar } from "react-native";
+import React from "react";
 
 const _layout = () => {
   return (
-    <View style={{flex: 1}}>
-        <Stack>
-            <Stack.Screen name="index" options={{headerShown: false}}/>
-            <Stack.Screen name="register" options={{title: 'Register'}}/>
-            <Stack.Screen name="(auth)/login" options={{ headerShown: false , title: 'Home'}}/>
-        </Stack>
-    </View>
-  )
-}
+    <>
+      <StatusBar styles="auto" />
+      <Stack>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="index"
+          options={{ headerShown: false, title: "Home" }}
+        />
+      </Stack>
+    </>
+  );
+};
 
-export default _layout
+export default _layout;
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({});

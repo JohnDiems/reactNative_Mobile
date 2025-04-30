@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Link } from "expo-router";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/davao_logo.png";
 import dcho from "../../assets/dcho.png";
 import InputField from "../../components/InputField";
 import CustomButton from "../../components/Buttom";
 import React from "react";
 
 const LoginForm = () => {
+
+  const Submit = () => {
+    console.log("Submit");
+  }
+
   return (
     <View style={styles.container}>
       <Image source={dcho} style={styles.dcho} />
@@ -15,7 +19,7 @@ const LoginForm = () => {
       <Text style={styles.sm_text}>Davao City Housing Office</Text>
       <Text style={styles.sm_sign}>Sign in to your account</Text>
       <View>
-        <InputField
+        <InputField 
           style={{ width: 350, paddingHorizontal: 12 }}
           label="Email address"
         />
@@ -28,8 +32,8 @@ const LoginForm = () => {
       <View>
         <CustomButton
           title="Sign in"
-          style={{ width: 330, marginTop: 10 }}
-          onPress={() => console.log("Button Pressed")}
+          style={{ width: 330, marginTop: 20 }}
+          onPress={Submit}
         />
       </View>
       <View style={[styles.reserved, { marginTop: 10 }]}>
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 120,
     height: undefined,
-    aspectRatio: 3,
+    aspectRatio: 2,
     marginTop: 10,
   },
   link: {
