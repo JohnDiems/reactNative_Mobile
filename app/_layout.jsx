@@ -11,7 +11,7 @@ const _layout = () => {
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen
           name="index"
-          options={{ headerShown: false, title: "Home" }}
+          options={{ headerShown: false, title: "Home", animation: "none" }}
         />
       </Stack>
     </>

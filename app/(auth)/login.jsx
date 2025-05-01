@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import logo from "../../assets/davao_logo.png";
 import dcho from "../../assets/dcho.png";
+import ThemedView  from "../../components/ThemedView";
 import InputField from "../../components/InputField";
 import CustomButton from "../../components/Buttom";
 import React from "react";
@@ -12,7 +13,7 @@ const LoginForm = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container} safe={true}>
       <Image source={dcho} style={styles.dcho} />
       <Text style={styles.title}>Housing Management</Text>
       <Text style={styles.title}>Information System</Text>
@@ -41,7 +42,7 @@ const LoginForm = () => {
         <Text style={styles.city}>© 2024 City Government of Davao City.</Text>
         <Text style={styles.city}>All rights reserved.</Text>
       </View>
-    </View>
+    </ThemedView>
   );
 };
 
@@ -49,6 +50,7 @@ export default LoginForm;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
