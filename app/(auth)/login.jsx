@@ -6,36 +6,31 @@ import dcho from "../../assets/dcho.png";
 import ThemedView from "../../components/ThemedView";
 import InputField from "../../components/InputField";
 import CustomButton from "../../components/Buttom";
+import Error from "../../components/Error";
 import React, { useState } from "react";
 
 const LoginForm = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({});
 
   const submitLogin = async () => {
-    console.log(
-      "Submitting login with email:",
-      email,
-      "and password:",
-      password
-    );
     try {
-      if (!email || !password) {
-        throw new Error("Email and password are required");
-      }
       const payload = {
-        email: email.trim(),
-        password: password,
+        email: form.email.trim(),
+        password: form.password,
       };
       const response = await authService.login(payload);
       if (response) {
         console.log("Login successful:", response);
       }
     } catch (error) {
-      console.error("Login error:", error);
+      setErrors({
+        email: error.message,
+        password: error.message
+      });
     }
   };
 
@@ -50,21 +45,28 @@ const LoginForm = () => {
       <Text style={[styles.sm_sign, { color: theme.text }]}>
         Sign in to your account
       </Text>
-      <View>
+
+      <View style={styles.inputContainer}>
         <InputField
-          value={email}
-          onChangeText={setEmail}
+          value={form.email}
+          onChangeText={(text) => setForm({ ...form, email: text })}
           style={{ width: 350, paddingHorizontal: 12 }}
           label="Email address"
         />
+        <Error error={errors.email} />
+      </View>
+
+      <View style={styles.inputContainer}>
         <InputField
-          value={password}
-          onChangeText={setPassword}
+          value={form.password}
+          onChangeText={(text) => setForm({ ...form, password: text })}
           secureTextEntry={true}
           label="Password"
           style={{ width: 350, paddingHorizontal: 12 }}
         />
+        <Error  error={errors.password} />
       </View>
+
       <View>
         <CustomButton
           title="Sign in"
@@ -128,5 +130,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "400",
     marginBottom: 2,
+  },
+  inputContainer: {
+    marginBottom: 10,
+    //  paddingHorizontal: 1
   },
 });
