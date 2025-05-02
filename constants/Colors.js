@@ -25,6 +25,6 @@ export const Colors = {
     success: "#4CAF50",
     border: "#444444",
     shadow: "rgba(30, 111, 217, 0.3)",
-    backgroundColor: "#000000",
+    backgroundColor: "#F5F7FA",
   },
 };

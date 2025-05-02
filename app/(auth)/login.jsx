@@ -1,30 +1,65 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, useColorScheme } from "react-native";
+import { Colors } from "../../constants/Colors";
+import { authService } from "../../components/API/AuthService";
 import logo from "../../assets/davao_logo.png";
 import dcho from "../../assets/dcho.png";
-import ThemedView  from "../../components/ThemedView";
+import ThemedView from "../../components/ThemedView";
 import InputField from "../../components/InputField";
 import CustomButton from "../../components/Buttom";
-import React from "react";
+import React, { useState } from "react";
 
 const LoginForm = () => {
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
 
-  const Submit = () => {
-    console.log("Submit");
-  }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitLogin = async () => {
+    console.log(
+      "Submitting login with email:",
+      email,
+      "and password:",
+      password
+    );
+    try {
+      if (!email || !password) {
+        throw new Error("Email and password are required");
+      }
+      const payload = {
+        email: email.trim(),
+        password: password,
+      };
+      const response = await authService.login(payload);
+      if (response) {
+        console.log("Login successful:", response);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
 
   return (
     <ThemedView style={styles.container} safe={true}>
       <Image source={dcho} style={styles.dcho} />
       <Text style={styles.title}>Housing Management</Text>
       <Text style={styles.title}>Information System</Text>
-      <Text style={styles.sm_text}>Davao City Housing Office</Text>
-      <Text style={styles.sm_sign}>Sign in to your account</Text>
+      <Text style={[styles.sm_text, { color: theme.text }]}>
+        Davao City Housing Office
+      </Text>
+      <Text style={[styles.sm_sign, { color: theme.text }]}>
+        Sign in to your account
+      </Text>
       <View>
-        <InputField 
+        <InputField
+          value={email}
+          onChangeText={setEmail}
           style={{ width: 350, paddingHorizontal: 12 }}
           label="Email address"
         />
         <InputField
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry={true}
           label="Password"
           style={{ width: 350, paddingHorizontal: 12 }}
@@ -34,13 +69,17 @@ const LoginForm = () => {
         <CustomButton
           title="Sign in"
           style={{ width: 330, marginTop: 20 }}
-          onPress={Submit}
+          onPress={submitLogin}
         />
       </View>
       <View style={[styles.reserved, { marginTop: 10 }]}>
         <Image source={logo} style={styles.logo} resizeMode="contain" />
-        <Text style={styles.city}>© 2024 City Government of Davao City.</Text>
-        <Text style={styles.city}>All rights reserved.</Text>
+        <Text style={[styles.city, { color: theme.text }]}>
+          © 2024 City Government of Davao City.
+        </Text>
+        <Text style={[styles.city, { color: theme.text }]}>
+          All rights reserved.
+        </Text>
       </View>
     </ThemedView>
   );
@@ -53,7 +92,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
   },
   title: {
     fontSize: 20,
@@ -70,25 +108,17 @@ const styles = StyleSheet.create({
     aspectRatio: 2,
     marginTop: 10,
   },
-  link: {
-    fontSize: 16,
-    color: "blue",
-    marginVertical: 10,
-    borderBottomWidth: 1,
-  },
   sm_text: {
     fontSize: 14,
-    color: "black",
-    fontWeight: "300",
+    fontWeight: "400",
     marginBottom: 10,
   },
   sm_sign: {
     fontSize: 14,
-    color: "black",
     fontWeight: "bold",
     marginVertical: 20,
     alignSelf: "flex-start",
-    marginLeft: 10,
+    marginLeft: 20,
   },
   reserved: {
     alignItems: "center",
@@ -96,7 +126,6 @@ const styles = StyleSheet.create({
   },
   city: {
     fontSize: 10,
-    color: "gray",
     fontWeight: "400",
     marginBottom: 2,
   },
