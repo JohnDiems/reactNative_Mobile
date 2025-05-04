@@ -1,5 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 const CustomButton = ({ title, onPress, style, textStyle }) => {
   return (
@@ -23,6 +25,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    width: width * 0.9,
+    alignSelf: 'center',
   },
   buttonText: {
     color: '#fff',

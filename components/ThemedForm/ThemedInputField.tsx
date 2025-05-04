@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginBottom: 16,
+    paddingHorizontal: 20,
   },
   label: {
     fontWeight: "medium",
