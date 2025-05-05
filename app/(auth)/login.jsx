@@ -8,22 +8,23 @@ import {
   SafeAreaView, TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from "../../constants/Colors";
 import { authService } from "../../components/API/AuthService";
-import ThemedView from "../../components/ThemedView";
+import { useUserStore } from "../../store/userStore";
+import { useRouter  } from 'expo-router';
+import ThemedView from "../../components/ThemedForm/ThemedView";
 import ThemedInputField from "../../components/ThemedForm/ThemedInputField";
 import ThemedCustomButton from "../../components/ThemedForm/ThemedButtom";
 import ThemedError from "../../components/ThemedForm/ThemedError";
 import logo from "../../assets/davao_logo.png";
 import dcho from "../../assets/dcho.png";
-import { useUserStore } from "../../store/userStore";
-
 import React, { useState } from "react";
 
 const LoginForm = () => {
-  const user = useUserStore((state) => state.user);
+  const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
-
+  
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
 
@@ -42,10 +43,12 @@ const LoginForm = () => {
         password: form.password,
       };
       const response = await authService.login(params);
-      if (response) {
-        setErrors({});
+      if (response.data) {
+        await AsyncStorage.setItem("_token", response.data.token);
         setUser(response.data.user);
-        console.log("Login successful:", response);
+        setErrors({});
+        router.replace('/dashboard');
+        console.log("Login successful:", response.data);
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -76,8 +79,6 @@ const LoginForm = () => {
       <Text style={[styles.sm_sign, { color: theme.text }]}>
         Sign in to your account
       </Text>
-
-      <Text>{user?.firstname}</Text>
 
       <View style={styles.inputContainer}>
         <ThemedInputField

@@ -1,5 +1,5 @@
 import { View, useColorScheme } from 'react-native'
-import { Colors } from "../constants/Colors"
+import { Colors } from "../../constants/Colors"
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import React from 'react'
 
