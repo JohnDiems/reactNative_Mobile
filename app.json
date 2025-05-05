@@ -1,6 +1,6 @@
 {
   "expo": {
-    "schema": "HMIS",
+    "scheme": "HMIS",
     "name": "reactNative_Mobile",
     "slug": "reactNative_Mobile",
     "version": "1.0.0",
