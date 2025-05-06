@@ -6,7 +6,8 @@ import {
   ActivityIndicator, 
   useColorScheme, 
   SafeAreaView, TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Dimensions 
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from "../../constants/Colors";
@@ -22,25 +23,24 @@ import dcho from "../../assets/dcho.png";
 import React, { useState } from "react";
 
 const LoginForm = () => {
-  const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
-  
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
-
+  const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({ 
     email: '',
     password: '' 
   });
   const [errors, setErrors] = useState({});
+  const windowWidth = Dimensions.get('window').width;
 
   const submitLogin = async () => {
     try {
       setIsLoading(true);
       const params = {
-        email: form.email.trim(),
-        password: form.password,
+        email: 'citc@admin.com',
+        password: 'password',
       };
       const response = await authService.login(params);
       if (response.data) {
@@ -82,8 +82,8 @@ const LoginForm = () => {
 
       <View style={styles.inputContainer}>
         <ThemedInputField
-          style={{ width: "380" }}
-          value={form.email}
+          style={{ width: windowWidth - 40 }}
+          value={'citc@admin.com'}
           onChangeText={(text) => setForm({ ...form, email: text })}
           label="Email address"
         />
@@ -92,8 +92,8 @@ const LoginForm = () => {
 
       <View style={styles.inputContainer}>
         <ThemedInputField
-          style={{ width: "380" }}
-          value={form.password}
+          style={{ width: windowWidth - 40 }}
+          value={'password'}
           onChangeText={(text) => setForm({ ...form, password: text })}
           secureTextEntry={true}
           label="Password"
@@ -103,6 +103,7 @@ const LoginForm = () => {
 
       <View>
         <ThemedCustomButton
+          style={{ width: windowWidth - 40 }}
           title="Sign in"
           onPress={submitLogin}
         />

@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
 
@@ -48,7 +49,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginBottom: 16,
-    paddingHorizontal: 20,
   },
   label: {
     fontWeight: "medium",

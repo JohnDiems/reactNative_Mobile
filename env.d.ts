@@ -1,4 +1,3 @@
 declare module '@env' {
-  export const API_BASE_URL: string;
-  // Add other env variables here if needed
+  export const BASE_API_URL: string;
 }
